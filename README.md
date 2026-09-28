@@ -2,7 +2,7 @@
 
 <p align="center"><strong>ML / LLM Engineer · Uzbek NLP · Agentic Systems</strong><br />Tashkent, Uzbekistan</p>
 
-<p align="center"><img src="assets/token-intro.gif" alt="Token-stream introduction about UFL-01, MCP agents, and low-bit quantization." width="900" /></p>
+<p align="center"><img src="assets/token-intro.gif" alt="Token-stream introduction: built UFL-01, award entry title, tokenizer adaptation, MCP systems, and low-bit quantization." width="900" /></p>
 
 <p align="center">
   <a href="https://t.me/zwyci"><img alt="Telegram" src="https://img.shields.io/badge/TELEGRAM-229ED9?style=for-the-badge&amp;logo=telegram&amp;logoColor=white" height="34" /></a>

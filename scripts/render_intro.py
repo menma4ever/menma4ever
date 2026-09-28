@@ -22,10 +22,10 @@ GREEN = "#7ee787"
 BLUE = "#79c0ff"
 
 MESSAGES = [
-    "Building UFL-01:\nan Uzbek-focused multimodal agentic LLM.",
-    "I adapt tokenizers and train\nUzbek-focused language models.",
-    "I build MCP agents that plan,\nuse tools, and recover.",
-    "I research low-bit quantization\nfor local AI.",
+    "Built UFL-01.\nAward entry: First Uzbek Multimodal Agentic LLM.",
+    "Tokenizer adaptation + CPT\ncompleted for Uzbek.",
+    "Agentic MCP systems:\ntools, review, and recovery.",
+    "Low-bit quantization research\nfor local AI.",
 ]
 
 
