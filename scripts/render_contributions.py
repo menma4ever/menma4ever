@@ -172,8 +172,9 @@ def draw_frame(calendar, board, active, target_x, flash_rows, placed, lines, pre
 
     gx, gy, grid_step, grid_cell = 376, 130, 12, 10
     d.rounded_rectangle((358, 72, 1026, 240), radius=12, fill="#111820", outline="#30363d", width=2)
-    d.text((376, 86), "PUBLIC GITHUB ACTIVITY", font=font(18, True), fill="#e6edf3")
-    d.text((376, 110), "52-week contribution calendar", font=font(12), fill="#8b949e")
+    d.text((376, 86), "GITHUB ACTIVITY / SNAPSHOT", font=font(18, True), fill="#e6edf3")
+    d.text((376, 110), f"52 weeks · captured {date.today().isoformat()}",
+           font=font(12), fill="#8b949e")
     for col, week in enumerate(calendar):
         for row, level in enumerate(week):
             px, py = gx + col * grid_step, gy + row * grid_step

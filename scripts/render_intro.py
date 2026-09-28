@@ -1,17 +1,36 @@
-"""Render a self-hosted, word-by-word profile introduction GIF."""
+"""Render a high-resolution README animation from real o200k_base BPE tokens.
+
+This is a token-stream visual, not a claim about a private model's exact tokenizer.
+Run locally with Pillow and tiktoken installed.
+"""
 
 from pathlib import Path
+
+import tiktoken
 from PIL import Image, ImageDraw, ImageFont
 
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "assets" / "token-intro.gif"
-SIZE = (900, 172)
+ENCODING = tiktoken.get_encoding("o200k_base")
+SIZE = (900, 190)
+SCALE = 2
 BG = "#0d1117"
 WHITE = "#e6edf3"
 MUTED = "#8b949e"
 GREEN = "#7ee787"
 BLUE = "#79c0ff"
+
+MESSAGES = [
+    "Building UFL-01:\nan Uzbek-focused multimodal agentic LLM.",
+    "I adapt tokenizers and train\nUzbek-focused language models.",
+    "I build MCP agents that plan,\nuse tools, and recover.",
+    "I research low-bit quantization\nfor local AI.",
+]
+
+
+def s(value: int | float) -> int:
+    return round(value * SCALE)
 
 
 def font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont:
@@ -21,53 +40,71 @@ def font(size: int, bold: bool = False) -> ImageFont.FreeTypeFont:
     ]
     for path in choices:
         if Path(path).exists():
-            return ImageFont.truetype(path, size)
+            return ImageFont.truetype(path, s(size))
     return ImageFont.load_default()
 
 
-def frame(visible: int) -> Image.Image:
-    image = Image.new("RGB", SIZE, BG)
+def draw_frame(message_index: int, visible_tokens: int) -> Image.Image:
+    ids = ENCODING.encode(MESSAGES[message_index])
+    prefix = ENCODING.decode(ids[:visible_tokens])
+    image = Image.new("RGB", (s(SIZE[0]), s(SIZE[1])), BG)
     d = ImageDraw.Draw(image)
-    d.rounded_rectangle((1, 1, 898, 170), radius=18, outline="#30363d", width=2)
-    d.ellipse((25, 21, 35, 31), fill="#ff7b72")
-    d.ellipse((43, 21, 53, 31), fill="#e3b341")
-    d.ellipse((61, 21, 71, 31), fill="#7ee787")
-    d.text((91, 18), "ufl / intro", font=font(14), fill=MUTED)
-    d.line((24, 48, 876, 48), fill="#30363d", width=1)
-    d.text((27, 65), ">", font=font(23, True), fill=GREEN)
-    d.text((52, 66), "generate_profile_intro()", font=font(21), fill=BLUE)
+    d.rounded_rectangle((s(1), s(1), s(899), s(189)), radius=s(16),
+                        outline="#30363d", width=s(2))
+    for x, color in ((28, "#ff7b72"), (47, "#e3b341"), (66, GREEN)):
+        d.ellipse((s(x), s(22), s(x + 10), s(32)), fill=color)
+    d.text((s(91), s(19)), "ufl / token stream", font=font(14), fill=MUTED)
+    d.text((s(757), s(19)), "o200k_base", font=font(13), fill=MUTED)
+    d.line((s(25), s(49), s(874), s(49)), fill="#30363d", width=s(1))
 
-    chunks = [
-        ("Hi,", 52, 105, WHITE),
-        ("I'm", 111, 105, WHITE),
-        ("Abdulaziz", 170, 105, WHITE),
-        ("Komilov.", 313, 105, WHITE),
-        ("I", 52, 136, WHITE),
-        ("build", 77, 136, WHITE),
-        ("Uzbek", 155, 136, GREEN),
-        ("LLMs", 247, 136, WHITE),
-        ("&", 313, 136, WHITE),
-        ("practical", 339, 136, WHITE),
-        ("AI", 473, 136, WHITE),
-        ("agents.", 511, 136, WHITE),
-    ]
-    body = font(20, True)
-    for token, x, y, color in chunks[:visible]:
-        d.text((x, y), token, font=body, fill=color)
-    if visible < len(chunks):
-        x = chunks[visible][1]
-        y = chunks[visible][2]
-        d.rectangle((x, y + 2, x + 10, y + 23), fill=GREEN)
+    d.text((s(28), s(64)), ">", font=font(23, True), fill=GREEN)
+    d.text((s(53), s(64)), "stream_profile()", font=font(22), fill=BLUE)
+
+    body_font = font(23, True)
+    line_y = (104, 137)
+    for line_number, line in enumerate(prefix.split("\n")):
+        if line_number < len(line_y):
+            d.text((s(53), s(line_y[line_number])), line, font=body_font, fill=WHITE)
+
+    if visible_tokens:
+        piece = ENCODING.decode([ids[visible_tokens - 1]])
+        before = ENCODING.decode(ids[:visible_tokens - 1])
+        before_lines = before.split("\n")
+        line_number = len(before_lines) - 1
+        x = s(53) + d.textlength(before_lines[-1], font=body_font)
+        for segment in piece.split("\n"):
+            if line_number < len(line_y) and segment:
+                d.text((round(x), s(line_y[line_number])), segment,
+                       font=body_font, fill=GREEN)
+            line_number += 1
+            x = s(53)
+
+    lines = prefix.split("\n")
+    current_line = min(len(lines) - 1, len(line_y) - 1)
+    cursor_x = s(53) + d.textlength(lines[-1], font=body_font) + s(4)
+    d.rounded_rectangle((round(cursor_x), s(line_y[current_line] + 2),
+                         round(cursor_x) + s(9), s(line_y[current_line] + 26)),
+                        radius=s(1), fill=GREEN)
+    d.text((s(718), s(164)), f"TOKEN {visible_tokens:02d}/{len(ids):02d}",
+           font=font(12), fill=MUTED)
     return image
 
 
 def main() -> None:
+    frames: list[Image.Image] = []
+    durations: list[int] = []
+    for message_index, message in enumerate(MESSAGES):
+        ids = ENCODING.encode(message)
+        for count in range(1, len(ids) + 1):
+            frames.append(draw_frame(message_index, count))
+            durations.append(130 if count < len(ids) else 1150)
+        for remaining in (len(ids) // 2, len(ids) // 4, 0):
+            frames.append(draw_frame(message_index, remaining))
+            durations.append(65)
     OUT.parent.mkdir(parents=True, exist_ok=True)
-    images = [frame(i) for i in range(13)]
-    durations = [200] + [180] * 11 + [2300]
-    images[0].save(OUT, save_all=True, append_images=images[1:], duration=durations,
-                   loop=0, optimize=True, disposal=2)
-    print(OUT)
+    frames[0].save(OUT, save_all=True, append_images=frames[1:],
+                   duration=durations, loop=0, optimize=True, disposal=2)
+    print(f"Rendered {len(frames)} frames from real {ENCODING.name} tokens to {OUT}")
 
 
 if __name__ == "__main__":

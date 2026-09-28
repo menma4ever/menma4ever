@@ -2,13 +2,13 @@
 
 <p align="center"><strong>ML / LLM Engineer · Uzbek NLP · Agentic Systems</strong><br />Tashkent, Uzbekistan</p>
 
-<p align="center"><img src="assets/token-intro.gif" alt="Word-by-word introduction: I build Uzbek language models and practical AI agents." width="900" /></p>
+<p align="center"><img src="assets/token-intro.gif" alt="Token-stream introduction about UFL-01, MCP agents, and low-bit quantization." width="900" /></p>
 
 <p align="center">
-  <a href="https://t.me/zwyci"><img alt="Telegram @zwyci" src="https://img.shields.io/badge/Telegram-%40zwyci-229ED9?style=for-the-badge&amp;logo=telegram&amp;logoColor=white" height="34" /></a>
-  <a href="mailto:rahimovabdelaziz@gmail.com"><img alt="Email Abdulaziz" src="https://img.shields.io/badge/Email-Contact%20me-D14836?style=for-the-badge&amp;logo=gmail&amp;logoColor=white" height="34" /></a>
-  <a href="https://huggingface.co/77terminator77"><img alt="Hugging Face 77terminator77" src="https://img.shields.io/badge/Hugging%20Face-Models-FFD21E?style=for-the-badge&amp;logo=huggingface&amp;logoColor=111111" height="34" /></a>
-  <a href="https://www.linkedin.com/in/abdulaziz-komilov-3015b6433/"><img alt="LinkedIn Abdulaziz Komilov" src="https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&amp;logo=linkedin&amp;logoColor=white" height="34" /></a>
+  <a href="https://t.me/zwyci"><img alt="Telegram" src="https://img.shields.io/badge/TELEGRAM-229ED9?style=for-the-badge&amp;logo=telegram&amp;logoColor=white" height="34" /></a>
+  <a href="mailto:rahimovabdelaziz@gmail.com"><img alt="Email" src="https://img.shields.io/badge/EMAIL-D14836?style=for-the-badge&amp;logo=gmail&amp;logoColor=white" height="34" /></a>
+  <a href="https://huggingface.co/77terminator77"><img alt="Hugging Face" src="https://img.shields.io/badge/HUGGING%20FACE-FFD21E?style=for-the-badge&amp;logo=huggingface&amp;logoColor=111111" height="34" /></a>
+  <a href="https://www.linkedin.com/in/abdulaziz-komilov-3015b6433/"><img alt="LinkedIn" src="https://img.shields.io/badge/LINKEDIN-0A66C2?style=for-the-badge&amp;logo=linkedin&amp;logoColor=white" height="34" /></a>
 </p>
 
 ## About me
@@ -35,32 +35,39 @@ I build Uzbek-language model pipelines and the systems that make them useful: da
 
 **Model development**
 
-![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
-![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white)
-![Transformers](https://img.shields.io/badge/Transformers-FFD21E?style=flat-square&logo=huggingface&logoColor=black)
-![Hugging Face Datasets](https://img.shields.io/badge/HF%20Datasets-FFD21E?style=flat-square&logo=huggingface&logoColor=black)
-![PEFT LoRA](https://img.shields.io/badge/PEFT%20%2F%20LoRA-6B4EFF?style=flat-square)
-![Jupyter](https://img.shields.io/badge/Jupyter-F37626?style=flat-square&logo=jupyter&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)
+![Transformers](https://img.shields.io/badge/Transformers-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black)
+![Hugging Face Datasets](https://img.shields.io/badge/HF%20Datasets-FFD21E?style=for-the-badge&logo=huggingface&logoColor=black)
+![PEFT LoRA](https://img.shields.io/badge/PEFT%20%2F%20LoRA-6B4EFF?style=for-the-badge)
+![Jupyter](https://img.shields.io/badge/Jupyter-F37626?style=for-the-badge&logo=jupyter&logoColor=white)
 
 **Training & inference**
 
-![CPT SFT](https://img.shields.io/badge/CPT%20%2F%20SFT-238636?style=flat-square)
-![Accelerate FSDP](https://img.shields.io/badge/Accelerate%20%2F%20FSDP-4C6EF5?style=flat-square)
-![DeepSpeed](https://img.shields.io/badge/DeepSpeed-223A5E?style=flat-square)
-![vLLM](https://img.shields.io/badge/vLLM-0A7E8C?style=flat-square)
-![llama.cpp](https://img.shields.io/badge/llama.cpp-545B64?style=flat-square)
-![GGUF](https://img.shields.io/badge/GGUF-545B64?style=flat-square)
+![CPT SFT](https://img.shields.io/badge/CPT%20%2F%20SFT-238636?style=for-the-badge)
+![Accelerate FSDP](https://img.shields.io/badge/Accelerate%20%2F%20FSDP-4C6EF5?style=for-the-badge)
+![DeepSpeed](https://img.shields.io/badge/DeepSpeed-223A5E?style=for-the-badge)
+![vLLM](https://img.shields.io/badge/vLLM-0A7E8C?style=for-the-badge)
+![llama.cpp](https://img.shields.io/badge/llama.cpp-545B64?style=for-the-badge)
+![GGUF](https://img.shields.io/badge/GGUF-545B64?style=for-the-badge)
 
 **Agents & infrastructure**
 
-![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)
-![MCP](https://img.shields.io/badge/MCP%20%2F%20tool%20calling-7A5AF8?style=flat-square)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
-![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=flat-square&logo=kubernetes&logoColor=white)
-![RunPod](https://img.shields.io/badge/RunPod-673DE6?style=flat-square)
-![Linux CLI](https://img.shields.io/badge/Linux%20CLI-FCC624?style=flat-square&logo=linux&logoColor=black)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
+![MCP](https://img.shields.io/badge/MCP%20%2F%20tool%20calling-7A5AF8?style=for-the-badge)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)
+![RunPod](https://img.shields.io/badge/RunPod-673DE6?style=for-the-badge)
+![Linux CLI](https://img.shields.io/badge/Linux%20CLI-FCC624?style=for-the-badge&logo=linux&logoColor=black)
 
-I also work with **OCR and image-text data**, **SQL/SQLite**, **REST APIs**, **Git/GitHub**, **Bash/PowerShell**, and **local model serving**.
+**Data & developer tools**
+
+![OCR](https://img.shields.io/badge/OCR%20%2F%20image--text-6B7280?style=for-the-badge)
+![SQL SQLite](https://img.shields.io/badge/SQL%20%2F%20SQLite-4479A1?style=for-the-badge&logo=sqlite&logoColor=white)
+![REST APIs](https://img.shields.io/badge/REST%20APIs-0A7E8C?style=for-the-badge)
+![Git GitHub](https://img.shields.io/badge/Git%20%2F%20GitHub-24292F?style=for-the-badge&logo=github&logoColor=white)
+![Bash PowerShell](https://img.shields.io/badge/Bash%20%2F%20PowerShell-4B5563?style=for-the-badge)
+![Local model serving](https://img.shields.io/badge/Local%20model%20serving-6B4EFF?style=for-the-badge)
 
 ## Contribution replay
 
