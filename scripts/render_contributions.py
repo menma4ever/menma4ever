@@ -137,17 +137,15 @@ def clear_lines(board: list[list[str | None]]) -> int:
     return cleared
 
 
-def draw_frame(calendar, board, active, target_x, flash_rows, placed, lines, preview):
-    width, height = 1050, 392
+def draw_frame(calendar, board, active, target_x, flash_rows, placed, lines, preview, scan=0):
+    width, height = 1050, 486
     image = Image.new("RGB", (width, height), "#0d1117")
     d = ImageDraw.Draw(image)
     d.rounded_rectangle((1, 1, width - 2, height - 2), radius=18, outline="#30363d", width=2)
-    d.text((30, 18), "CONTRIBUTIONS // TETRIS", font=font(22, True), fill="#e6edf3")
-    d.text((30, 48), "A real calendar beside a small falling-block game", font=font(12), fill="#8b949e")
+    d.text((24, 17), "CONTRIBUTION TETRIS", font=font(22, True), fill="#e6edf3")
 
-    bx, by, step, cell = 30, 82, 20, 18
-    d.rounded_rectangle((bx - 5, by - 5, bx + BOARD_W * step + 4, by + BOARD_H * step + 4),
-                        radius=6, fill="#111820", outline="#48515b", width=2)
+    bx, by, step, cell = 24, 57, 29, 26
+    d.rounded_rectangle((18, 51, 320, 469), radius=8, fill="#111820", outline="#48515b", width=2)
     for row in range(BOARD_H):
         for col in range(BOARD_W):
             px, py = bx + col * step, by + row * step
@@ -172,39 +170,51 @@ def draw_frame(calendar, board, active, target_x, flash_rows, placed, lines, pre
             d.rounded_rectangle((px, py, px + cell, py + cell), radius=2,
                                 fill=color, outline="#f0f6fc", width=1)
 
-    gx, gy, grid_step, grid_cell = 275, 128, 13, 10
-    d.text((gx, 87), "PUBLIC GITHUB ACTIVITY", font=font(18, True), fill="#e6edf3")
-    d.text((gx, 108), "Each small square is one day in GitHub's calendar", font=font(11), fill="#8b949e")
+    gx, gy, grid_step, grid_cell = 376, 130, 12, 10
+    d.rounded_rectangle((358, 72, 1026, 240), radius=12, fill="#111820", outline="#30363d", width=2)
+    d.text((376, 86), "PUBLIC GITHUB ACTIVITY", font=font(18, True), fill="#e6edf3")
+    d.text((376, 110), "52-week contribution calendar", font=font(12), fill="#8b949e")
     for col, week in enumerate(calendar):
         for row, level in enumerate(week):
             px, py = gx + col * grid_step, gy + row * grid_step
             d.rounded_rectangle((px, py, px + grid_cell, py + grid_cell), radius=2,
                                 fill=ACTIVITY_COLORS[level])
+    active_days = [(col, row) for col, week in enumerate(calendar)
+                   for row, level in enumerate(week) if level != "NONE"]
+    if active_days:
+        col, row = active_days[(scan // 3) % len(active_days)]
+        px, py = gx + col * grid_step, gy + row * grid_step
+        d.rounded_rectangle((px - 2, py - 2, px + grid_cell + 2, py + grid_cell + 2),
+                            radius=3, outline="#79c0ff", width=2)
+    progress = (scan // 2) % len(calendar)
+    d.line((376, 226, 376 + (progress + 1) * grid_step, 226), fill="#79c0ff", width=3)
 
-    d.text((gx, 248), f"PIECES LOCKED  {placed:02d}    LINES CLEARED  {lines:02d}",
-           font=font(16, True), fill="#79c0ff")
-    d.text((gx, 280), "Pieces travel to columns, land on the stack and clear full rows.",
-           font=font(11), fill="#8b949e")
-    d.text((gx, 306), "Game blocks are decorative; activity cells are real GitHub data.",
-           font=font(11), fill="#8b949e")
+    d.text((376, 261), f"{placed:02d}", font=font(52, True), fill="#79c0ff")
+    d.text((450, 286), "PIECES LOCKED", font=font(15, True), fill="#8b949e")
+    d.text((670, 261), f"{lines:02d}", font=font(52, True), fill="#7ee787")
+    d.text((744, 286), "LINES CLEARED", font=font(15, True), fill="#8b949e")
+    d.line((376, 339, 1005, 339), fill="#30363d", width=2)
+    d.text((376, 363), "FALLING PIECES  /  REAL CONTRIBUTIONS", font=font(17, True), fill="#e6edf3")
+    d.text((376, 398), "The calendar follows my public GitHub activity.",
+           font=font(13), fill="#8b949e")
     if preview:
-        d.text((gx, 342), "DEMO CALENDAR CELLS - NOT LIVE ACTIVITY", font=font(12, True), fill="#ff7b72")
+        d.text((376, 439), "DEMO DATA", font=font(13, True), fill="#ff7b72")
     else:
-        d.text((gx, 342), "UFL-01  /  Uzbek NLP  /  local AI", font=font(12, True), fill="#7ee787")
+        d.text((376, 439), "UFL-01  /  Uzbek NLP  /  local AI", font=font(13, True), fill="#7ee787")
     return image
 
 
 def render(calendar: list[list[str]], output: Path, preview: bool = False) -> tuple[int, int]:
     board = empty_board()
-    frames = [draw_frame(calendar, board, None, None, [], 0, 0, preview)]
-    durations = [450]
+    frames = []
+    durations = []
     lines = 0
     for placed, (name, target) in enumerate(GAME):
         cells, color = PIECES[name]
         x = min(4, BOARD_W - max(dx for dx, _ in cells) - 1)
-        y = -max(dy for _, dy in cells) - 1
+        y = 0
         for _ in range(40):
-            frames.append(draw_frame(calendar, board, (name, x, y), target, [], placed, lines, preview))
+            frames.append(draw_frame(calendar, board, (name, x, y), target, [], placed, lines, preview, len(frames)))
             durations.append(95)
             moved = False
             if x != target:
@@ -224,16 +234,16 @@ def render(calendar: list[list[str]], output: Path, preview: bool = False) -> tu
         else:
             raise ValueError("Tetris animation exceeded frame limit")
         full = lock(board, cells, color, x, y)
-        frames.append(draw_frame(calendar, board, None, None, [], placed + 1, lines, preview))
+        frames.append(draw_frame(calendar, board, None, None, [], placed + 1, lines, preview, len(frames)))
         durations.append(180)
         if full:
             for _ in range(2):
-                frames.append(draw_frame(calendar, board, None, None, full, placed + 1, lines, preview))
+                frames.append(draw_frame(calendar, board, None, None, full, placed + 1, lines, preview, len(frames)))
                 durations.append(130)
             lines += clear_lines(board)
-            frames.append(draw_frame(calendar, board, None, None, [], placed + 1, lines, preview))
+            frames.append(draw_frame(calendar, board, None, None, [], placed + 1, lines, preview, len(frames)))
             durations.append(220)
-    frames.append(draw_frame(calendar, board, None, None, [], len(GAME), lines, preview))
+    frames.append(draw_frame(calendar, board, None, None, [], len(GAME), lines, preview, len(frames)))
     durations.append(1700)
     output.parent.mkdir(parents=True, exist_ok=True)
     frames[0].save(output, save_all=True, append_images=frames[1:], duration=durations,
