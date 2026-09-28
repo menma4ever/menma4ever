@@ -23,7 +23,8 @@ BLUE = "#79c0ff"
 
 MESSAGES = [
     "Built UFL-01.\nAward entry: First Uzbek Multimodal Agentic LLM.",
-    "Tokenizer adaptation + CPT\ncompleted for Uzbek.",
+    "Tokenizer + CPT + SFT + DPO\ncompleted for UFL-01.",
+    "Quantized model complete.\nPublic Hugging Face release pending.",
     "Agentic MCP systems:\ntools, review, and recovery.",
     "Low-bit quantization research\nfor local AI.",
 ]

@@ -2,7 +2,7 @@
 
 <p align="center"><strong>ML / LLM Engineer · Uzbek NLP · Agentic Systems</strong><br />Tashkent, Uzbekistan</p>
 
-<p align="center"><img src="assets/token-intro.gif" alt="Token-stream introduction: built UFL-01, award entry title, tokenizer adaptation, MCP systems, and low-bit quantization." width="900" /></p>
+<p align="center"><img src="assets/token-intro.gif" alt="Token-stream introduction: UFL-01 award entry, completed tokenizer, CPT, SFT, DPO and quantization stages, private model release status, MCP systems, and low-bit research." width="900" /></p>
 
 <p align="center">
   <a href="https://t.me/zwyci"><img alt="Telegram" src="https://img.shields.io/badge/TELEGRAM-229ED9?style=for-the-badge&amp;logo=telegram&amp;logoColor=white" height="34" /></a>
@@ -23,11 +23,11 @@ I build Uzbek-language model pipelines and the systems that make them useful: da
 
 | Uzbek-focused LLM | Agentic MCP systems | Efficient inference |
 | --- | --- | --- |
-| **UFL-01** is a Gemma 4 E2B-based project aimed at Uzbek-focused multimodal, agentic use. Tokenizer adaptation and continued pretraining are complete; chat and tool-use SFT are in progress. Multimodal and agentic model capabilities remain development goals. | Building MCP-based manager and worker workflows with persistent state, tool execution, review, and recovery. The [UFL runtime](https://github.com/menma4ever/UFL) also explores local desktop tools and confirmation-aware actions. | Researching low-bit and ternary quantization for smaller local models. I compare compressed-model quality, memory use, and runtime with full-precision baselines; this work is ongoing. |
+| **UFL-01** is my Gemma 4 E2B-based project, registered for an AI award under the title “First Uzbek Multimodal Agentic LLM.” Tokenizer adaptation, continued pretraining, SFT, and DPO are complete. A quantized model has been produced but is not yet publicly available on Hugging Face. | Building MCP-based manager and worker workflows with persistent state, tool execution, review, and recovery. The [UFL runtime](https://github.com/menma4ever/UFL) also explores local desktop tools and confirmation-aware actions. | A quantized UFL-01 model is complete for local inference. Separately researching low-bit and ternary quantization for smaller models, with quality, memory, and runtime comparisons ongoing. |
 
 ## Selected work
 
-- **[UFL](https://github.com/menma4ever/UFL)** — local Uzbek-language desktop agent and tool runtime.
+- **[UFL](https://github.com/menma4ever/UFL)** — local Uzbek-language desktop agent and tool runtime; the quantized UFL-01 model is not publicly released yet.
 - **[Agentic Team MCP](https://github.com/menma4ever/agentic-team-mcp)** — manager and worker orchestration with persistent state and a web interface.
 - **[RelayCanvas](https://github.com/menma4ever/relaycanvas)** — visual multi-agent workflow builder with live traces.
 
@@ -44,7 +44,7 @@ I build Uzbek-language model pipelines and the systems that make them useful: da
 
 **Training & inference**
 
-![CPT SFT](https://img.shields.io/badge/CPT%20%2F%20SFT-238636?style=for-the-badge)
+![CPT SFT DPO](https://img.shields.io/badge/CPT%20%2F%20SFT%20%2F%20DPO-238636?style=for-the-badge)
 ![Accelerate FSDP](https://img.shields.io/badge/Accelerate%20%2F%20FSDP-4C6EF5?style=for-the-badge)
 ![DeepSpeed](https://img.shields.io/badge/DeepSpeed-223A5E?style=for-the-badge)
 ![vLLM](https://img.shields.io/badge/vLLM-0A7E8C?style=for-the-badge)
